@@ -1,0 +1,40 @@
+composer create-project laravel/laravel
+composer require jason-guru/laravel-make-repository --dev
+composer require laravel/ui
+php artisan ui vue --auth
+npm install && npm run dev
+npm upgrade
+npm run dev
+
+https://github.com/binshops/laravel-blog
+http://laravel.local/blog_admin/setup
+Внесем изменения в home.blade.php
+
+php artisan make:controller TestController
+php artisan make:model TestBlog
+php artisan make:migration create_blog_posts_table
+
+https://dev.to/jsf00/implement-crud-with-laravel-service-repository-pattern-1dkl
+------------------------------------------------
+https://www.itsolutionstuff.com/post/laravel-8-crud-application-tutorial-for-beginnersexample.html
+
+php artisan make:controller PostController --resource --model=Post
+php artisan make:migration create_post_table
+//$table->bigInteger('user_id')->unsigned();
+php artisan migrate:rollback --step=1
+
+------------------------------------------------------------------------
+0)Небольшие изменения в show.blade.php
+1)php artisan make:migration update_posts_table
+2)Получаем лайки
+3)Обновляем лайки
+4)Возвращаем вид поста
+
+------------------------------------------------------------------------
+Ограничиваем одного пользователя только одним лайком на пост
+1)Создаем связь многие ко многим    php artisan make:migration create_post_user_table
+2)Создаем в моделях методы для связи с belongsToMany()
+3)Создаем пост, у которого еще нет лайков
+4)Организуем проверку в контроллере PostController есть ли запись в post_user
+   Выполняем накрутку лайка только если в post_user нет инфы про лайк со стороны нашего юзера
+5)В модели PostUserModel создаем метод isLiked
